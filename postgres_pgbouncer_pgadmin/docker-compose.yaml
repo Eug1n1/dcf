@@ -35,13 +35,12 @@ services:
   pgadmin4:
       container_name: pgadmin
       image: elestio/pgadmin:REL-9_4
-      restart: always
       env_file:
         - "./envs/pgadmin.env"
       ports:
         - "8080:8080"
       depends_on:
-        - db
+        - pgbouncer
       healthcheck:
         test: ["CMD", "curl", "--fail", "http://localhost:8080/", "||", "exit", "1"]
         interval: 40s
